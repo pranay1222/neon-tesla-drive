@@ -19,31 +19,22 @@ const ContactForm = () => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: "top 80%",
-        end: "bottom 20%",
-        toggleActions: "play none none reverse"
+        start: "top 70%",
+        end: "bottom 30%",
       }
     });
 
-    // Enhanced section reveal
-    tl.from(sectionRef.current, {
+    tl.from(titleRef.current, {
+      x: -50,
       opacity: 0,
-      y: 100,
-      duration: 1.2,
-      ease: "power3.out"
+      duration: 1,
+      ease: "power2.out"
     })
-    .from(titleRef.current, {
-      x: -80,
-      opacity: 0,
-      duration: 1,
-      ease: "power3.out"
-    }, "-=0.8")
     .from(formRef.current, {
-      x: 80,
+      x: 50,
       opacity: 0,
-      scale: 0.95,
       duration: 1,
-      ease: "power3.out"
+      ease: "power2.out"
     }, "-=0.7");
 
   }, []);

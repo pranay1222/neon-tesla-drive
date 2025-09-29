@@ -49,38 +49,39 @@ const Specifications = () => {
   ];
 
   useEffect(() => {
-    // Enhanced section reveal
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 80%",
-        end: "bottom 20%",
-        toggleActions: "play none none reverse"
+    // Title animation
+    gsap.fromTo(titleRef.current, 
+      { y: 50, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: titleRef.current,
+          start: "top 80%",
+          end: "bottom 20%",
+        }
       }
-    });
+    );
 
-    // Section entrance
-    tl.from(sectionRef.current, {
-      opacity: 0,
-      y: 100,
-      duration: 1.2,
-      ease: "power3.out"
-    })
-    .from(titleRef.current, {
-      y: 60,
-      opacity: 0,
-      duration: 1,
-      ease: "power3.out"
-    }, "-=0.8")
-    .from(cardsRef.current, {
-      y: 80,
-      opacity: 0,
-      scale: 0.8,
-      rotation: 5,
-      duration: 1,
-      stagger: 0.15,
-      ease: "power3.out"
-    }, "-=0.5");
+    // Cards stagger animation
+    gsap.fromTo(cardsRef.current,
+      { y: 60, opacity: 0, scale: 0.9 },
+      {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 0.8,
+        ease: "power2.out",
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 60%",
+          end: "bottom 20%",
+        }
+      }
+    );
 
   }, []);
 
@@ -98,26 +99,26 @@ const Specifications = () => {
           Specifications
         </h2>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {specs.map((spec, index) => (
             <div
               key={spec.title}
               ref={el => cardsRef.current[index] = el}
-              className="glass p-6 sm:p-8 rounded-2xl border border-border/20 hover:glow-primary transition-all duration-500 group interactive cursor-pointer"
+              className="glass p-8 rounded-2xl border border-border/20 hover:glow-primary transition-all duration-300 group"
             >
-              <div className="text-3xl sm:text-4xl mb-4 group-hover:scale-125 transition-transform duration-500">
+              <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
                 {spec.icon}
               </div>
               
-              <h3 className="text-xl sm:text-2xl font-light mb-2 text-foreground group-hover:text-gradient transition-all duration-300">
+              <h3 className="text-2xl font-light mb-2 text-foreground">
                 {spec.title}
               </h3>
               
-              <div className="text-2xl sm:text-3xl md:text-4xl font-light mb-2 text-gradient">
+              <div className="text-3xl md:text-4xl font-light mb-2 text-gradient">
                 {spec.value}
               </div>
               
-              <p className="text-sm sm:text-base text-muted-foreground">
+              <p className="text-muted-foreground">
                 {spec.description}
               </p>
             </div>
