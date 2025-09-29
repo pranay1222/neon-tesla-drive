@@ -13,23 +13,32 @@ const VideoSection = () => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: "top 70%",
-        end: "bottom 30%",
+        start: "top 80%",
+        end: "bottom 20%",
+        toggleActions: "play none none reverse"
       }
     });
 
-    tl.from(titleRef.current, {
-      y: 50,
+    // Enhanced section reveal
+    tl.from(sectionRef.current, {
       opacity: 0,
-      duration: 1,
-      ease: "power2.out"
+      y: 100,
+      duration: 1.2,
+      ease: "power3.out"
     })
-    .from(videoRef.current, {
+    .from(titleRef.current, {
       y: 60,
       opacity: 0,
-      scale: 0.95,
-      duration: 1.2,
-      ease: "power2.out"
+      duration: 1,
+      ease: "power3.out"
+    }, "-=0.8")
+    .from(videoRef.current, {
+      y: 80,
+      opacity: 0,
+      scale: 0.9,
+      rotation: 2,
+      duration: 1.5,
+      ease: "power3.out"
     }, "-=0.5");
 
   }, []);
@@ -50,7 +59,7 @@ const VideoSection = () => {
         
         <div 
           ref={videoRef}
-          className="relative max-w-4xl mx-auto glass rounded-3xl overflow-hidden border border-border/20 glow-primary"
+          className="relative max-w-5xl mx-auto glass rounded-3xl overflow-hidden border border-border/20 glow-primary interactive group"
         >
           <div className="relative aspect-video">
             <iframe 
@@ -62,12 +71,12 @@ const VideoSection = () => {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
               referrerPolicy="strict-origin-when-cross-origin" 
               allowFullScreen
-              className="rounded-3xl"
+              className="rounded-3xl transition-transform duration-500 group-hover:scale-105"
             />
           </div>
           
-          {/* Video overlay gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent pointer-events-none" />
+          {/* Enhanced video overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-background/30 via-transparent to-background/10 pointer-events-none opacity-50 group-hover:opacity-30 transition-opacity duration-500" />
         </div>
         
         <div className="text-center mt-12">

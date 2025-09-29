@@ -11,42 +11,50 @@ const Hero = () => {
   useEffect(() => {
     const tl = gsap.timeline({ delay: 3.5 }); // After preloader
 
-    // Main content animations
-    tl.from(titleRef.current, {
+    // Enhanced section reveal animation
+    tl.from(heroRef.current, {
+      opacity: 0,
+      scale: 0.95,
+      duration: 1.5,
+      ease: "power3.out"
+    })
+    .from(titleRef.current, {
+      y: 80,
+      opacity: 0,
+      duration: 1.2,
+      ease: "power3.out"
+    }, "-=1")
+    .from(subtitleRef.current, {
       y: 50,
       opacity: 0,
       duration: 1,
-      ease: "power2.out"
-    })
-    .from(subtitleRef.current, {
-      y: 30,
-      opacity: 0,
-      duration: 0.8,
-      ease: "power2.out"
-    }, "-=0.5")
+      ease: "power3.out"
+    }, "-=0.8")
     .from(ctaRef.current, {
-      y: 30,
+      y: 40,
       opacity: 0,
-      duration: 0.8,
-      ease: "power2.out"
-    }, "-=0.3");
+      duration: 1,
+      ease: "power3.out"
+    }, "-=0.6");
 
-    // Floating particles animation
+    // Enhanced floating particles animation
     particleRefs.current.forEach((particle, index) => {
       if (particle) {
         gsap.set(particle, {
           x: Math.random() * window.innerWidth,
           y: Math.random() * window.innerHeight,
+          scale: 0.5 + Math.random() * 0.5,
         });
         
         gsap.to(particle, {
-          y: "+=100",
-          x: "+=50",
+          y: `+=${100 + Math.random() * 50}`,
+          x: `+=${50 + Math.random() * 50}`,
           rotation: 360,
-          duration: 10 + index * 2,
+          scale: "+=0.3",
+          duration: 15 + index * 3,
           repeat: -1,
           yoyo: true,
-          ease: "none"
+          ease: "sine.inOut"
         });
       }
     });
@@ -87,43 +95,45 @@ const Hero = () => {
       ))}
       
       {/* Content Overlay */}
-      <div className="relative z-10 text-center px-6 glass p-12 rounded-3xl border border-border/20">
-        <h1 
-          ref={titleRef}
-          className="text-5xl md:text-7xl lg:text-8xl font-light mb-6 text-gradient"
-        >
-          Model 3
-        </h1>
-        
-        <p 
-          ref={subtitleRef}
-          className="text-xl md:text-2xl text-foreground/80 mb-8 tracking-wide"
-        >
-          Lease From $349/mo
-        </p>
-        
-        <div ref={ctaRef} className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button className="btn-tesla pulse-glow">
-            Order Now
-          </button>
-          <button className="btn-tesla-outline">
-            Experience Model 3
-          </button>
-        </div>
-        
-        {/* Quick Stats */}
-        <div className="grid grid-cols-3 gap-8 mt-12 pt-8 border-t border-border/20">
-          <div className="text-center">
-            <div className="text-2xl md:text-3xl font-light text-gradient">15 min</div>
-            <div className="text-sm text-muted-foreground">Recharge up to 195 miles*</div>
+      <div className="relative z-10 text-center px-4 sm:px-6">
+        <div className="glass p-8 sm:p-12 lg:p-16 rounded-3xl border border-border/20 max-w-4xl mx-auto">
+          <h1 
+            ref={titleRef}
+            className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-light mb-6 text-gradient leading-tight"
+          >
+            Model 3
+          </h1>
+          
+          <p 
+            ref={subtitleRef}
+            className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-foreground/80 mb-8 tracking-wide"
+          >
+            Lease From $349/mo
+          </p>
+          
+          <div ref={ctaRef} className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <button className="btn-tesla pulse-glow interactive text-sm sm:text-base">
+              Order Now
+            </button>
+            <button className="btn-tesla-outline interactive text-sm sm:text-base">
+              Experience Model 3
+            </button>
           </div>
-          <div className="text-center">
-            <div className="text-2xl md:text-3xl font-light text-gradient">357 mi</div>
-            <div className="text-sm text-muted-foreground">Range (EPA est.)</div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl md:text-3xl font-light text-gradient">AWD</div>
-            <div className="text-sm text-muted-foreground">Dual Motor</div>
+          
+          {/* Enhanced Quick Stats */}
+          <div className="grid grid-cols-3 gap-4 sm:gap-8 pt-8 border-t border-border/20">
+            <div className="text-center">
+              <div className="text-xl sm:text-2xl md:text-3xl font-light text-gradient mb-2">15 min</div>
+              <div className="text-xs sm:text-sm text-muted-foreground">Recharge up to 195 miles*</div>
+            </div>
+            <div className="text-center">
+              <div className="text-xl sm:text-2xl md:text-3xl font-light text-gradient mb-2">357 mi</div>
+              <div className="text-xs sm:text-sm text-muted-foreground">Range (EPA est.)</div>
+            </div>
+            <div className="text-center">
+              <div className="text-xl sm:text-2xl md:text-3xl font-light text-gradient mb-2">AWD</div>
+              <div className="text-xs sm:text-sm text-muted-foreground">Dual Motor</div>
+            </div>
           </div>
         </div>
       </div>
