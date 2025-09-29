@@ -1,4 +1,6 @@
-# Welcome to your Lovable project
+# Welcome to our Tesla Model 3 Project
+
+This project is made using the modern AI Tools and with knowledge of HTML,CSS,JS,React-Vite,GSAP,TAilwind etc.
 
 ## Project info
 
@@ -24,10 +26,10 @@ Follow these steps:
 
 ```sh
 # Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+git clone (https://github.com/pranay1222/neon-tesla-drive.git)
 
 # Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+cd neon-tesla-drive
 
 # Step 3: Install the necessary dependencies.
 npm i
